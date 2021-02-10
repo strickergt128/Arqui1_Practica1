@@ -79,11 +79,11 @@ void loop() {
     pantalla.setLed(0, 5, -175+i, true);
 
     //* Segunda Pantalla
-    pantalla.setLed(1, 7, -179+i, true);
     pantalla.setLed(1, 7, -181+i, true);
-    pantalla.setLed(1, 6, -180+i, true);
-    pantalla.setLed(1, 5, -179+i, true);
+    pantalla.setLed(1, 7, -183+i, true);
+    pantalla.setLed(1, 6, -182+i, true);
     pantalla.setLed(1, 5, -181+i, true);
+    pantalla.setLed(1, 5, -183+i, true);
     
     delay(100);
   }
