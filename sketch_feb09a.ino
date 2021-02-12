@@ -4,6 +4,12 @@
 MatrizLed pantalla;
 
 int body[200][2];
+int n = 1;
+int tamano = 3;
+int x = 0, y = 2;
+int dir = 3;
+int xfood = 6, yfood = 6;
+int puntos = 0;
 
 #define S1 8
 #define S2 9
@@ -31,7 +37,88 @@ void setup() {
 }
 
 
+void guardarPos(){
+  body[n][0] = x;
+  body[n][1] = y;
+  n++;
+  if(n == tamano){
+    n = 1;
+  }
+}
+
+void dibujarCuerpo(){
+  for(int i = 1; i < tamano; i ++){
+    if(body[i][0] > 7){
+      pantalla.setLed(1, body[i][1],-8+body[i][0], true);
+    }else{
+      pantalla.setLed(0, body[i][1],body[i][0], true);
+    }
+  }
+}
+
+void borrarCuerpo(){
+  if(body[n][0] > 7){
+    pantalla.setLed(1, body[n][1],-8+body[n][0], false);
+  }else{
+    pantalla.setLed(0, body[n][1],body[n][0], false);
+  }
+}
+
+void cambiarDireccion(){
+    if(digitalRead(btn1) == LOW){
+      if(dir != 2){
+        dir = 1;
+      }
+    }else if(digitalRead(btn3) == LOW){
+      if(dir != 1){
+        dir = 2;
+      }
+    }else if(digitalRead(btn2) == LOW){
+      if(dir != 4){
+        dir = 3; 
+      }
+    }else if(digitalRead(btn4) == LOW){
+      if(dir != 3){
+        dir = 4;
+      }
+    }
+}
+
+void food(){
+  if(x == xfood && y == yfood){
+    xfood = (rand()%15);
+    yfood = (rand()%8);
+
+    tamano++;
+    puntos++;
+    
+    if(xfood > 7){
+      pantalla.setLed(1, yfood,-8+xfood, true);
+    }else{
+      pantalla.setLed(0, yfood,xfood, true);
+    }
+  }
+}
+
+void puntos(){
+  
+}
+
+bool gameOver(){
+  if( y == -1 || y == 8 || x == -1 || x == 16 ){
+    return true;
+  }
+  for(int j = tamano - 1; j > 0; j--){
+    if(body[j][0] == x && body[j][1] == y){
+      return true;
+    }
+  }
+
+  return false;
+}
+
 void loop() {
+  
 
   if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
     pantalla.borrar();
@@ -110,12 +197,28 @@ void loop() {
       pantalla.setLed(1, 6, -182+i, true);
       pantalla.setLed(1, 5, -181+i, true);
       pantalla.setLed(1, 5, -183+i, true);
-      if(digitalRead(S1) == LOW && digitalRead(S2) == HIGH | digitalRead(start) == LOW){
+      if(digitalRead(S1) == LOW && digitalRead(S2) == HIGH || digitalRead(start) == LOW){
         pantalla.borrar();
         break;
       }
       delay(100);
     }
+  }
+  
+  pantalla.setLed(0, yfood,xfood, true);
+  
+  while(digitalRead(start) == LOW && !gameOver()){
+    borrarCuerpo();
+    guardarPos();
+    dibujarCuerpo();
+    food();
+    cambiarDireccion();
+    cambiarDireccion();
+    if(dir == 1) y--;
+    if(dir == 2) y++;
+    if(dir == 3) x++;
+    if(dir == 4) x--;
+    delay(500);
   }
     
   while(digitalRead(S1) == LOW && digitalRead(S2) == HIGH){
