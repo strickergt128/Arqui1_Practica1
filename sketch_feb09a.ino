@@ -1,16 +1,35 @@
 #include <MatrizLed.h>
+#include <stdlib.h>
 
 MatrizLed pantalla;
+
+int body[200][2];
 
 #define S1 8
 #define S2 9
 
+#define btn1 2
+#define btn2 3
+#define btn3 4
+#define btn4 5
+
+#define start 6
+
 void setup() {
   pinMode (S1, INPUT);
   pinMode (S2, INPUT);
-  pantalla.begin(11, 13, 12, 2); // dataPin, clkPin, csPin, numero de matrices de 8x8
+  
+  pinMode (btn1, INPUT);
+  pinMode (btn2, INPUT);
+  pinMode (btn3, INPUT);
+  pinMode (btn4, INPUT);
+
+  pinMode (start, INPUT);
+  
+  pantalla.begin(11, 13, 12, 2);
   pantalla.rotar(true);
 }
+
 
 void loop() {
 
@@ -91,209 +110,208 @@ void loop() {
       pantalla.setLed(1, 6, -182+i, true);
       pantalla.setLed(1, 5, -181+i, true);
       pantalla.setLed(1, 5, -183+i, true);
-      if(digitalRead(S1) == LOW && digitalRead(S2) == HIGH){
+      if(digitalRead(S1) == LOW && digitalRead(S2) == HIGH | digitalRead(start) == LOW){
         pantalla.borrar();
         break;
       }
       delay(100);
     }
-    while(digitalRead(S1) == LOW && digitalRead(S2) == HIGH){
+  }
+    
+  while(digitalRead(S1) == LOW && digitalRead(S2) == HIGH){
+    pantalla.borrar();
+    
+    //* Primera Pantalla
+    pantalla.setLed(1, 7, 5, true);
+    pantalla.setLed(1, 7, 7, true);
+    pantalla.setLed(1, 6, 6, true);
+    pantalla.setLed(1, 5, 5, true);
+    pantalla.setLed(1, 5, 7, true);
+    
+    delay(500);
+    
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      
-      //* Primera Pantalla
-      pantalla.setLed(1, 7, 5, true);
-      pantalla.setLed(1, 7, 7, true);
-      pantalla.setLed(1, 6, 6, true);
-      pantalla.setLed(1, 5, 5, true);
-      pantalla.setLed(1, 5, 7, true);
+      break;
+    }
+    pantalla.borrar();
+    
+    pantalla.escribirCaracter('T' , 0);
+    delay(500);
 
-      
-      
-      delay(500);
-      
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      
-      pantalla.escribirCaracter('T' , 0);
-      delay(500);
+      break;
+    }
+    
+    pantalla.borrar();
+    pantalla.escribirCaracter('P' , 0);
+    delay(500);
 
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('P' , 0);
-      delay(500);
+      break;
+    }
+    
+    pantalla.borrar();
+    pantalla.escribirCaracter('1' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
+      pantalla.borrar();
+      break;
+    }
+    pantalla.borrar();
+    
+    //- Primera Pantalla
+    pantalla.setLed(1, 4, 2, true);
+    pantalla.setLed(1, 4, 3, true);
+    pantalla.setLed(1, 4, 4, true);
+    pantalla.setLed(1, 4, 5, true);
+    pantalla.setLed(1, 3, 2, true);
+    pantalla.setLed(1, 3, 3, true);
+    pantalla.setLed(1, 3, 4, true);
+    pantalla.setLed(1, 3, 5, true);
 
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('1' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('G' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      
-      //- Primera Pantalla
-      pantalla.setLed(1, 4, 2, true);
-      pantalla.setLed(1, 4, 3, true);
-      pantalla.setLed(1, 4, 4, true);
-      pantalla.setLed(1, 4, 5, true);
-      pantalla.setLed(1, 3, 2, true);
-      pantalla.setLed(1, 3, 3, true);
-      pantalla.setLed(1, 3, 4, true);
-      pantalla.setLed(1, 3, 5, true);
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('R' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
+      pantalla.borrar();
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('U' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
+      pantalla.borrar();
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('P' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
+      pantalla.borrar();
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('O' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
+      pantalla.borrar();
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('1' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
+      pantalla.borrar();
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('1' , 0);
 
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('G' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      pantalla.borrar();
-      pantalla.escribirCaracter('R' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      pantalla.borrar();
-      pantalla.escribirCaracter('U' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      pantalla.borrar();
-      pantalla.escribirCaracter('P' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      pantalla.borrar();
-      pantalla.escribirCaracter('O' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      pantalla.borrar();
-      pantalla.escribirCaracter('1' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
-      pantalla.borrar();
-      pantalla.escribirCaracter('1' , 0);
+      break;
+    }
+    pantalla.borrar();
+    
+    //- Primera Pantalla
+    pantalla.setLed(1, 4, 2, true);
+    pantalla.setLed(1, 4, 3, true);
+    pantalla.setLed(1, 4, 4, true);
+    pantalla.setLed(1, 4, 5, true);
+    pantalla.setLed(1, 3, 2, true);
+    pantalla.setLed(1, 3, 3, true);
+    pantalla.setLed(1, 3, 4, true);
+    pantalla.setLed(1, 3, 5, true);
 
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      
-      //- Primera Pantalla
-      pantalla.setLed(1, 4, 2, true);
-      pantalla.setLed(1, 4, 3, true);
-      pantalla.setLed(1, 4, 4, true);
-      pantalla.setLed(1, 4, 5, true);
-      pantalla.setLed(1, 3, 2, true);
-      pantalla.setLed(1, 3, 3, true);
-      pantalla.setLed(1, 3, 4, true);
-      pantalla.setLed(1, 3, 5, true);
-
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('S' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('S' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('E' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('E' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('C' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('C' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('C' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('C' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('I' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('I' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('O' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('O' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('N' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('N' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    pantalla.escribirCaracter('A' , 0);
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      pantalla.escribirCaracter('A' , 0);
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
+    }
+    pantalla.borrar();
+    //* Primera Pantalla
+    pantalla.setLed(1, 7, 5, true);
+    pantalla.setLed(1, 7, 7, true);
+    pantalla.setLed(1, 6, 6, true);
+    pantalla.setLed(1, 5, 5, true);
+    pantalla.setLed(1, 5, 7, true);
+    
+    delay(500);
+    if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
       pantalla.borrar();
-      //* Primera Pantalla
-      pantalla.setLed(1, 7, 5, true);
-      pantalla.setLed(1, 7, 7, true);
-      pantalla.setLed(1, 6, 6, true);
-      pantalla.setLed(1, 5, 5, true);
-      pantalla.setLed(1, 5, 7, true);
-      
-      delay(500);
-      if(digitalRead(S1) == HIGH && digitalRead(S2) == HIGH){
-        pantalla.borrar();
-        break;
-      }
+      break;
     }
   }
   
